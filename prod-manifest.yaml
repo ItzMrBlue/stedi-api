@@ -3,20 +3,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stedi-prod
+  name: prod-stedi-lorenzo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: stedi-prod
+      app: prod-stedi-lorenzo
   template:
     metadata:
       labels:
-        app: stedi-prod
+        app: prod-stedi-lorenzo
     spec:
       containers:
-        - name: stedi-prod
-          image: gcr.io/cubs-consulting/stedi
+        - name: prod-stedi-lorenzo
+          image: gcr.io/cubs-consulting/stedi #This img need to refer to the new Artifact 
           env:
             - name: REDIS_PASSWORD
               valueFrom:
@@ -41,8 +41,6 @@ spec:
               cpu: ".25"
               memory: "250Mi"
           livenessProbe:
-            httpGet:
-              path: /
               port: 4567
             initialDelaySeconds: 3
             periodSeconds: 3
